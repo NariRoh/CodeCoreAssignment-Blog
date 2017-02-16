@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 featured-post">
+      <%= image_tag Faker::LoremPixel.image %>
+        <div class="posts-icons">
+          <div class="likes">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <h4>456</h4>
+          </div>
+          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+        </div>
+      <h1>Post Title</h1>
+      <p><%= Faker::Lorem.paragraph(20) %></p>
+      <%= link_to 'Post Author Name' %>
+      <h5>Post Date</h5>
+    </div>
+
+    <div class="col-md-4 visible-md visible-lg most-liked">
+      <h1>Most Liked</h1>
+      <ul class="list-unstyled">
+        <% 5.times do %>
+          <li><a href="#"><%= Faker::Lorem.sentence %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <% 4.times do %>
+      <div class="col-md-4">
+        <%= image_tag Faker::LoremPixel.image %>
+        <div class="posts-icons">
+          <div class="likes">
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <h4>456</h4>
+          </div>
+          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+        </div>
+        <h1>Post Title</h1>
+        <p><%= Faker::Lorem.paragraph(20) %></p>
+        <%= link_to 'Post Author Name' %>
+        <h5>Post Date</h5>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+  <h2>More Articles</h2>
