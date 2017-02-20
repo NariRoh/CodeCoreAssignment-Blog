@@ -1,18 +1,29 @@
-<div class="container">
+<div class="container main">
   <div class="row">
     <div class="col-md-8 featured-post">
-      <%= image_tag Faker::LoremPixel.image %>
-        <div class="posts-icons">
-          <div class="likes">
-            <i class="fa fa-heart-o" aria-hidden="true"></i>
-            <h4>456</h4>
-          </div>
-          <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+      <%= link_to post_path(@feature_post) do %>
+        <%= image_tag 'main.jpg', class: 'img-responsive' %>
+      <% end %>
+      <div class="posts-icons">
+        <div class="likes">
+          <i class="fa fa-heart-o" aria-hidden="true"></i>
+          <h4>456</h4>
         </div>
-      <h1>Post Title</h1>
-      <p><%= Faker::Lorem.paragraph(20) %></p>
-      <%= link_to 'Post Author Name' %>
-      <h5>Post Date</h5>
+        <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+      </div>
+      <%= link_to post_path(@feature_post) do %>
+        <div class="post-content">
+          <h1><%= @feature_post.title %></h1>
+          <p><%= Faker::Lorem.paragraph(20) %></p>
+        </div>
+      <% end %>
+      <div class="feature-author">
+        <%= image_tag 'nari.jpg', class: 'img-circle' %>
+        <div class="feature-author-info">
+          <%= link_to 'Post Author Name' %>
+          <span><%= time_tag @feature_post.created_at, :format => '%B %d' %></span>
+        </div>
+      </div>
     </div>
 
     <div class="col-md-4 visible-md visible-lg most-liked">
@@ -28,7 +39,7 @@
   <div class="row">
     <% 4.times do %>
       <div class="col-md-4">
-        <%= image_tag Faker::LoremPixel.image %>
+        <%= image_tag 'sub.jpeg', class: 'img-responsive' %>
         <div class="posts-icons">
           <div class="likes">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -45,5 +56,4 @@
   </div>
 </div>
 
-
-  <h2>More Articles</h2>
+<h2 class="text-center"><%= link_to 'More Articles' %></h2>

@@ -9,3 +9,7 @@
 # 10.times do |post|
 #   Post.create( title: )
 # end
+
+6.times do
+  Category.create( name: Faker::Zelda.character )
+end

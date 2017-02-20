@@ -1,0 +1,17 @@
+<%= form_for @post do |f| %>
+  <div class="form-group">
+    <%= f.label :title, 'Title' %>
+    <%= f.text_field :title, class: 'form-control' %>
+  </div>
+  <div class="form-group">
+    <%= f.label :category, 'Category' %>
+    <%= f.collection_select :category_id, Category.all, :id, :name, {prompt: "Select a category"}, {class: "form-control"} %>
+  </div>
+  <div class="form-group">
+    <%= f.label :body, 'Post' %>
+    <%= f.text_area :body, class: 'form-control', rows: '10' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit 'Submit', class: 'btn btn-default' %>
+  </div>
+<% end %>

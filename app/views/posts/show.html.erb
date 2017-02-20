@@ -1,11 +1,17 @@
-<div class="container post-main">
-  <h1>Post Title</h1>
-  <%= image_tag Faker::LoremPixel.image %>
-  <!-- <div class="row"> -->
-    <!-- <div class="col-md-8"> -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 main-title">
+      <h1><%= @post.title %></h1>
+    </div>
+  </div>
+</div>
 
-      <p><%= Faker::Lorem.paragraph(20) %></p>
-      <h4>Post Date</h3>
+<%= image_tag 'main.jpg', class: 'img-responsive', id: 'main' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 main-post">
+      <p><%= @post.body %></p>
       <div class="posts-icons">
         <div class="likes">
           <i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -14,40 +20,54 @@
         <i class="fa fa-bookmark-o" aria-hidden="true"></i>
       </div>
 
-      <h4>Post Category</h4>
+      <div class="post-info">
+        <span>Category: <%= @post.category.name %></span>
+        <span><%= time_tag @post.created_at, :format => '%B %d' %></span>
+      </div>
+
       <div class="author-container">
-        <%= image_tag Faker::LoremPixel.image %>
+        <%= image_tag 'nari.jpg', class: 'img-circle' %>
         <div class="author-profile">
-          <a href="#"><h3>Author Name</h3></a>
+          <%= link_to 'Post Author Name' %>
           <p><%= Faker::Lorem.paragraph(5) %></p>
         </div>
       </div>
-    <!-- </div> -->
-    <div class="container-fluid comments-container">
-      <form>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-container col-md-8 comment-form">
+      <%= form_for [@post, @comment] do |f| %>
         <div class="form-group">
-          <label for="comment">Leave a comment</label>
-          <textarea class="form-control" rows="3"></textarea>
+          <%= f.label :body, 'Leave a comment' %>
+          <%= f.text_area :body, class: 'form-control', rows: '3' %>
         </div>
-      </form>
-      <form class="form-horizontal">
         <div class="form-group">
-          <label for="full-name" class="col-sm-2 control-label">Full Name</label>
-          <div class="col-sm-10">
-            <input type="text" class="form-control">
-          </div>
-        </div>
-      </form>
-
-      <% 4.times do %>
-        <div class="col-md-11 col-md-offset-1 comment">
-          <%= image_tag Faker::LoremPixel.image %>
-          <p><%= Faker::Lorem.paragraph(5) %></p>
-          <div class="comment-info">
-            <h4>Comment Author Name</h4>
-            <h4>Comment Date</h4>
-          </div>
+          <%#= f.label :full_name, 'Full Name', class: 'control-label' %>
+          <%#= f.text_area :full_name, class: 'form-control' %>
+          <label for="full-name" class="control-label">Full Name</label>
+          <input type="text" class="form-control">
+          <%= f.submit 'Publish', class: 'btn btn-default btn-right' %>
         </div>
       <% end %>
     </div>
+
+    <% if @post.comments.present? %>
+      <% @post.comments.each do |comment| %>
+        <div class="col-md-7 col-md-offset-3 comment-container">
+          <div class="comment-box">
+            <%= image_tag 'dan.jpg', class: 'img-circle' %>
+            <div class="comment-info">
+              <%= link_to 'Comment Author Name' %>
+              <span><%= time_tag comment.created_at, :format => '%B %d' %></span>
+            </div>
+            <%= link_to 'Delete', comment_path(comment),
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'delete-btn' %>
+          </div>
+        <p><%= comment.body %></p>
+      </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
