@@ -1,6 +1,7 @@
 class Post < ApplicationRecord
-  has_many :comments
+  has_many :comments, dependent: :destroy
   belongs_to :category
+  belongs_to :user
 
   before_save :titleize_title
 

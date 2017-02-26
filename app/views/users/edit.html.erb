@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 sign-up-form">
+      <h1>Editing Your Info</h1>
+
+      <%= form_for @user do |f| %>
+        <div class="form-group">
+          <%= f.label :email, 'Email address' %>
+          <%= f.email_field :email, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :first_name, 'First Name' %>
+          <%= f.text_field :first_name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= f.label :last_name, 'Last Name' %>
+          <%= f.text_field :last_name, class: 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%#= button_to 'Change Password', class: 'btn btn-default btn-lg btn-block', method => 'get' %>
+          <%= link_to 'Change Password', new_password_reset_path, class: 'btn btn-default btn-lg btn-block' %>
+        </div>
+        <%= f.submit 'Submit', class: 'btn btn-default' %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -7,4 +7,13 @@ Rails.application.routes.draw do
   resources :posts, shallow: true do
     resources :comments, only: [:create, :destroy]
   end
+
+  resources :users
+
+  resources :sessions, only: [:new, :create] do
+    delete :destroy, on: :collection
+  end
+
+  resources :password_resets, except: [:index, :destroy]
+
 end
