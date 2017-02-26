@@ -3,6 +3,7 @@
     <div class="col-md-7 sign-up-form">
       <h1>Sign Up</h1>
 
+      <p><%= @user.errors.full_messages.join(', ') %></p>
       <%= form_for @user do |f| %>
         <div class="form-group">
           <%= f.label :email, 'Email address' %>

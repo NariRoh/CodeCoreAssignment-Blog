@@ -1,3 +1,4 @@
+<p><%= @post.errors.full_messages.join(', ') %></p>
 <%= form_for @post do |f| %>
   <div class="form-group">
     <%= f.label :title, 'Title' %>

@@ -6,8 +6,11 @@ class User < ApplicationRecord
   before_validation :downcase_email
   before_save :full_name
 
-  validates :first_name, :last_name, :email, :password, :password_confirmation, presence: true
-
+  validates :first_name, :last_name, :email, presence: true
+  validates :password, :password_confirmation, presence: true,
+                                              #  length: { minimum: 6 },
+                                               allow_nil: true
+                                              
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   validates :email, uniqueness: true,

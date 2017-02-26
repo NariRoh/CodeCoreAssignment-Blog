@@ -5,6 +5,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def create
+    @user = current_user
     if @user.update( password: params[:new_password],
                      password_confirmation: params[:password_confirmation] )
       redirect_to edit_user_path @user, notice: 'Your password changed!'
@@ -18,7 +19,7 @@ class PasswordResetsController < ApplicationController
 
   def matching_password
     @user = current_user
-    unless @user&.authenticate params[:password]
+    unless @user&.authenticate params[:current_password]
       flash.now[:alert] = "You entered wrong password"
       render :new
       puts "User was not found"
@@ -26,8 +27,9 @@ class PasswordResetsController < ApplicationController
   end
 
   # def password_params
-  #   password_params = params.require(:password).permit(:password,
-  #                                                      :password_confirmation)
+  #   password_params = params.require(:password_reset).permit(:current_password,
+  #                                                            :new_password,
+  #                                                            :password_confirmation)
   # end
 
 end
