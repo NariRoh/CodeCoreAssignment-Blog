@@ -25,6 +25,17 @@
         <span><%= time_tag @post.created_at, :format => '%B %d' %></span>
       </div>
 
+      <% if can?(:manage, @post) %>
+        <div class="post-info">
+          <%= link_to 'edit', edit_post_path, class: 'btn btn-default' %>
+          <%= link_to 'delete', post_path(@post),
+                                method: :delete,
+                                data: { confirm: 'Are you sure?' },
+                                class: 'btn btn-default' %>
+        </div>
+      <% end %>
+
+
       <div class="author-container">
         <%= image_tag 'nari.jpg', class: 'img-circle' %>
         <div class="author-profile">
@@ -35,21 +46,23 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-container col-md-8 comment-form">
-      <%= form_for [@post, @comment] do |f| %>
-        <div class="form-group">
-          <%= f.label :body, 'Leave a comment' %>
-          <%= f.text_area :body, class: 'form-control', rows: '3' %>
-        </div>
-        <div class="form-group">
-          <%#= f.label :full_name, 'Full Name', class: 'control-label' %>
-          <%#= f.text_area :full_name, class: 'form-control' %>
-          <label for="full-name" class="control-label">Full Name</label>
-          <input type="text" class="form-control">
-          <%= f.submit 'Publish', class: 'btn btn-default btn-right' %>
-        </div>
-      <% end %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="form-container col-md-8 comment-form">
+        <%= form_for [@post, @comment] do |f| %>
+          <div class="form-group">
+            <%= f.label :body, 'Leave a comment' %>
+            <%= f.text_area :body, class: 'form-control', rows: '3' %>
+          </div>
+          <div class="form-group">
+            <%#= f.label :full_name, 'Full Name', class: 'control-label' %>
+            <%#= f.text_area :full_name, class: 'form-control' %>
+            <label for="full-name" class="control-label">Full Name</label>
+            <input type="text" class="form-control">
+            <%= f.submit 'Publish', class: 'btn btn-default btn-right' %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
 
     <% if @post.comments.present? %>
       <% @post.comments.each do |comment| %>
@@ -57,13 +70,15 @@
           <div class="comment-box">
             <%= image_tag 'dan.jpg', class: 'img-circle' %>
             <div class="comment-info">
-              <%= link_to 'Comment Author Name' %>
+              <%= link_to comment.user.full_name %>
               <span><%= time_tag comment.created_at, :format => '%B %d' %></span>
             </div>
-            <%= link_to 'Delete', comment_path(comment),
-            method: :delete,
-            data: { confirm: 'Are you sure?' },
-            class: 'delete-btn' %>
+            <% if can?(:destroy, comment) %>
+              <%= link_to 'Delete', comment_path(comment),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'delete-btn' %>
+            <% end %>
           </div>
         <p><%= comment.body %></p>
       </div>

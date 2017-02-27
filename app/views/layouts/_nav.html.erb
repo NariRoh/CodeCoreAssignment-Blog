@@ -26,6 +26,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
+          <li><%= link_to 'Write a story', new_post_path %></li>
           <li><%= link_to "Hello! #{current_user.first_name}",
                   edit_user_path(session[:user_id])%></li>
           <li><%= link_to 'Sign Out', sessions_path,
