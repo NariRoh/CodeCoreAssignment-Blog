@@ -1,2 +1,3 @@
-class Admin::PanelController < ApplicationController
+class Admin::PanelController < Admin::BaseController
+
 end

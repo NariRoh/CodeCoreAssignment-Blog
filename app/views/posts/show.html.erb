@@ -39,7 +39,7 @@
       <div class="author-container">
         <%= image_tag 'nari.jpg', class: 'img-circle' %>
         <div class="author-profile">
-          <%= link_to 'Post Author Name' %>
+          <%= link_to @post.user.full_name %>
           <p><%= Faker::Lorem.paragraph(5) %></p>
         </div>
       </div>

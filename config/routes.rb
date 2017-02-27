@@ -16,4 +16,8 @@ Rails.application.routes.draw do
 
   resources :password_resets, except: [:index, :destroy]
 
+  namespace :admin do
+    resources :panel, only: [:index]
+  end
+
 end
