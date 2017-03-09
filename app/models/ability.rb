@@ -12,14 +12,20 @@ class Ability
       p.user == user
     end
 
-    # can :destroy, Comment if
     can :manage, Comment do |c|
-      # c.user || p.c.user == user
       c.user == user
     end
 
     can :destroy, Comment do |c|
       c.post.user == user
+    end
+
+    can :like, Post do |p|
+      p.user != user
+    end
+
+    cannot :like, Post do |p|
+      p.user == user
     end
 
     # Define abilities for the passed in user here. For example:

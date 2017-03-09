@@ -1,14 +1,34 @@
 <div class="container main">
   <div class="row">
+
+    <!-- Featured Post -->
+
     <div class="col-md-8 featured-post">
       <%= link_to post_path(@feature_post) do %>
         <%= image_tag 'main.jpg', class: 'img-responsive' %>
       <% end %>
       <div class="posts-icons">
-        <div class="likes">
+        <!-- <div class="likes">
           <i class="fa fa-heart-o" aria-hidden="true"></i>
           <h4>456</h4>
+        </div> -->
+        <div class="likes">
+          <% if user_signed_in? && can?(:like, @feature_post) %>
+            <% if @feature_post.liked_by?(current_user) %>
+              <%= link_to like_path(@feature_post.like_for(current_user)), method: :delete do %>
+                <i class="fa fa-heart" aria-hidden="true"></i>
+              <% end %>
+            <% else %>
+              <%= link_to post_likes_path(@feature_post), method: :post do %>
+                <i class="fa fa-heart-o" aria-hidden="true"></i>
+              <% end %>
+            <% end %>
+          <% else %>
+            <i class="fa fa-heart-o" aria-hidden="true"></i>
+          <% end %>
+          <h4><%= @feature_post.likes_count if @feature_post.likes_count > 0 %></h4>
         </div>
+
         <i class="fa fa-bookmark-o" aria-hidden="true"></i>
       </div>
       <%= link_to post_path(@feature_post) do %>
@@ -26,6 +46,8 @@
       </div>
     </div>
 
+    <!-- Most Liked -->
+
     <div class="col-md-4 visible-md visible-lg most-liked">
       <h1>Most Liked</h1>
       <ul class="list-unstyled">
@@ -36,6 +58,8 @@
     </div>
   </div>
 
+  <!-- Posts -->
+
   <div class="row">
     <% @posts.each do |post| %>
       <div class="col-md-4">
@@ -43,9 +67,25 @@
           <%= image_tag 'sub.jpeg', class: 'img-responsive' %>
         <% end %>
         <div class="posts-icons">
-          <div class="likes">
+          <!-- <div class="likes">
             <i class="fa fa-heart-o" aria-hidden="true"></i>
             <h4>456</h4>
+          </div> -->
+          <div class="likes">
+            <% if user_signed_in? && can?(:like, post) %>
+              <% if post.liked_by?(current_user) %>
+                <%= link_to like_path(post.like_for(current_user)), method: :delete do %>
+                  <i class="fa fa-heart" aria-hidden="true"></i>
+                <% end %>
+              <% else %>
+                <%= link_to post_likes_path(post), method: :post do %>
+                  <i class="fa fa-heart-o" aria-hidden="true"></i>
+                <% end %>
+              <% end %>
+            <% else %>
+              <i class="fa fa-heart-o" aria-hidden="true"></i>
+            <% end %>
+            <h4><%= post.likes_count if post.likes_count > 0 %></h4>
           </div>
           <i class="fa fa-bookmark-o" aria-hidden="true"></i>
         </div>

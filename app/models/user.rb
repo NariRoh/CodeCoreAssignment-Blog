@@ -1,7 +1,11 @@
 class User < ApplicationRecord
   has_secure_password
+  
   has_many :posts, dependent: :nullify
   has_many :comments, dependent: :nullify
+
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
 
   before_validation :downcase_email
   before_save :full_name
@@ -10,7 +14,7 @@ class User < ApplicationRecord
   validates :password, :password_confirmation, presence: true,
                                               #  length: { minimum: 6 },
                                                allow_nil: true
-                                              
+
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   validates :email, uniqueness: true,
