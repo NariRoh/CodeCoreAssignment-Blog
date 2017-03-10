@@ -28,8 +28,9 @@
         <% if user_signed_in? %>
           <li><%= link_to 'Write a story', new_post_path %></li>
           <li><%= link_to "Hello! #{current_user.first_name}",
-                  edit_user_path(session[:user_id])%></li>
-          <li><%= link_to 'Sign Out', sessions_path,
+                  edit_user_path(session[:user_id])%></li> 
+          <li><%= link_to 'Liked Posts', user_likes_path(current_user) %></li>
+          <li><%= link_to 'Log Out', sessions_path,
                                       method: :delete %></li>
         <% else %>
           <li><%= link_to 'Sign Up', new_user_path %></li>

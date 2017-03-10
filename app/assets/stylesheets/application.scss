@@ -133,21 +133,21 @@ a:hover {
   padding: 2% 0 5% 0%;
 }
 
-.feature-author, .comment-box {
+.feature-author, .comment-box, .liked-post-author {
   display: flex;
   > img, {
-    width: 50px;
-    height: 50px;
+    width: 36px;
+    height: 36px;
   }
-  > .feature-author-info, .comment-info {
+  > .feature-author-info, .comment-info, .liked-post-info {
     font-family: BlinkMacSystemFont;
     padding-left: 15px;
-    font-size: 18px;
+    font-size: 14px;
     > span {
-      font-size: 13px;
+      font-size: 12px;
       color: rgba(0,0,0,.44);
       display: block;
-      padding-top: 5px;
+      // padding-top: 5px;
     }
   }
 }
@@ -207,10 +207,11 @@ a:hover {
   padding: 0 5% 5% 5%;
 }
 
-.comment-container {
+.comment-container, .liked-post-card {
   float: none;
   margin: 0 auto;
   margin-bottom: 2%;
+  padding: 15px 20px 15px 20px;
   border: 1px solid rgba(0,0,0,.19);
   box-shadow: 0 1px 4px rgba(0,0,0,.04);
   border-radius: 6px;
@@ -218,9 +219,10 @@ a:hover {
 
 .comment-box {
   display: flex;
-  padding: 2% 0 3% 0%;
+  margin-bottom: 10px;
+  // padding: 2% 0 3% 0%;
   .comment-info {
-    padding-left: 15px;
+    // padding-left: 15px;
   }
   .delete-btn {
     margin-left: auto;
@@ -240,4 +242,36 @@ a:hover {
   h1 {
     margin-bottom: 5%;
   }
+}
+
+.liked-post-card {
+  // border: 1px solid rgba(0,0,0,.09);
+  h3 {
+    margin-top: 0;
+  }
+  .liked-post-author {
+    margin-bottom: 10px;
+  }
+  .grey {
+    color: rgba(0,0,0,.44);
+  }
+  .small {
+    font-size: 12px;
+  }
+  .liked-post-buttons {
+    padding-top: 10px;
+    display: flex;
+    justify-content: space-between;
+      span {
+        margin-right: 8px;
+      }
+  }
+}
+
+.head {
+  padding-bottom: 30px;
+}
+
+.footer {
+  margin-top: 30px;
 }

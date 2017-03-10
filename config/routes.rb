@@ -9,7 +9,9 @@ Rails.application.routes.draw do
     resources :likes, only: [:create, :destroy]
   end
 
-  resources :users
+  resources :users do
+    resources :likes, only: :index 
+  end
 
   resources :sessions, only: [:new, :create] do
     delete :destroy, on: :collection

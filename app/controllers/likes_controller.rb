@@ -1,7 +1,10 @@
 class LikesController < ApplicationController
   before_action :authenticate_user!
   before_action :find_post, only: :create
-  before_action :find_like, only: :destroy
+
+  def index
+    @liked_posts = current_user.liked_posts
+  end
 
   def create
     like = Like.new user: current_user, post: @post

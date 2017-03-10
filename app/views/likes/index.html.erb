@@ -1,0 +1,28 @@
+<div class="col-md-8 col-md-offset-2">
+  <h1 class="head">Posts you've liked</h1>
+
+  <% @liked_posts.each do |post| %>
+      <div class="liked-post-card">
+        <div class="liked-post-author">
+          <%= image_tag 'nari.jpg', class: 'img-circle' %>
+          <div class="liked-post-info">
+            <%= link_to post.user.full_name %>
+            <span><%= time_tag post.created_at, :format => '%B %d' %></span>
+          </div>
+        </div>
+        <h3><%= link_to post.title, post %></h3>
+        <%= link_to 'Read more...', post, class: 'grey small' %>
+        <div class="liked-post-buttons">
+          <div class="liked-post-like">
+            <i class="fa fa-heart" aria-hidden="true"></i>
+            <%= post.likes_count %>
+          </div>
+          <div class="liked-post-bookmark">
+            <span><%= pluralize post.comments.count,'comment' %></span>
+            <i class="fa fa-bookmark-o" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+  <% end %>
+
+</div>

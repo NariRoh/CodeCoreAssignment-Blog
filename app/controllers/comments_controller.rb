@@ -6,8 +6,9 @@ class CommentsController < ApplicationController
     @post = Post.find params[:post_id]
     @comment.post = @post
     @comment.user = current_user
-    
+
     if @comment.save
+      CommentsMailer.notify_post_owner(@comment).deliver_later
       redirect_to post_path(@post), notice: 'Comment Created!'
     else
       flash[:alert] = 'Please fix your errors'
