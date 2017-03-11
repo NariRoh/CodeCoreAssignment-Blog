@@ -2,6 +2,9 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   def authenticate_user!
+    url = params[:redirect_url] || request.referer
+    session[:redirect_url] = url
+
     redirect_to new_session_path, alert: 'Please sign in' unless user_signed_in?
   end
 
@@ -15,4 +18,7 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 
+  def redirect_url
+    request.url
+  end
 end

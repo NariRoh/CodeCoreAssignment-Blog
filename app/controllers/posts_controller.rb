@@ -6,6 +6,10 @@ class PostsController < ApplicationController
   def index
     @posts = Post.order(created_at: :desc)
     @feature_post = Post.last
+    # ap request
+    # Rails.logger.debug ">>>>>>>>>>>>>"
+    # Rails.logger.debug { request.path }
+    # Rails.logger.debug ">>>>>>>>>>>>>"  
   end
 
   def new
